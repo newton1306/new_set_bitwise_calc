@@ -1,0 +1,11 @@
+flowchart TD
+    Start([Start])
+    Start --> Clear[Clear all bits]
+    Clear --> Init[Initialize i = 0]
+    Init --> Loop{i < n?}
+    Loop -->|Yes| Check{arr[i] >= 0 AND arr[i] < 100?}
+    Check -->|Yes| SetBit[Set bit at position arr[i]]
+    Check -->|No| Inc
+    SetBit --> Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| End([End])

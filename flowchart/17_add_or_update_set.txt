@@ -1,0 +1,12 @@
+flowchart TD
+    Start([Start])
+    Start --> Find[Find set by name]
+    Find --> CheckFound{idx != -1?}
+    CheckFound -->|Yes| Update[Update existing set bits]
+    CheckFound -->|No| CheckSpace{nsets < MAX_SETS?}
+    CheckSpace -->|Yes| AddNew[Copy name and set bits]
+    AddNew --> IncCount[Increment nsets]
+    CheckSpace -->|No| Error[Print: Storage full error]
+    Update --> End([End])
+    IncCount --> End
+    Error --> End

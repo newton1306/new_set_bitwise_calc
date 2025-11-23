@@ -1,0 +1,13 @@
+flowchart TD
+    Start([Start])
+    Start --> PrintHeader[Print header: Summary of All Sets]
+    PrintHeader --> CheckEmpty{nsets == 0?}
+    CheckEmpty -->|Yes| PrintNoSets[Print: No sets stored yet]
+    CheckEmpty -->|No| Init[Initialize i = 0]
+    Init --> Loop{i < nsets?}
+    Loop -->|Yes| PrintSet[Print set i]
+    PrintSet --> Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| PrintDiv[Print divider]
+    PrintNoSets --> End([End])
+    PrintDiv --> End

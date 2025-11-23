@@ -1,0 +1,13 @@
+flowchart TD
+    Start([Start])
+    Start --> OpenFile[Open file for reading]
+    OpenFile --> CheckOpen{File opened successfully?}
+    CheckOpen -->|No| Error[Print: Cannot open file]
+    CheckOpen -->|Yes| PrintReading[Print: Reading from file]
+    PrintReading --> Loop{Read line from file}
+    Loop -->|Success| Parse[Call parse_and_add_set]
+    Parse --> Loop
+    Loop -->|EOF| Close[Close file]
+    Close --> PrintDone[Print: Import finished]
+    Error --> End([End])
+    PrintDone --> End

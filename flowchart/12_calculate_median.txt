@@ -1,0 +1,11 @@
+flowchart TD
+    Start([Start])
+    Start --> Convert[Convert bits to sorted array]
+    Convert --> CheckEmpty{n == 0?}
+    CheckEmpty -->|Yes| Return0[Return 0.0]
+    CheckEmpty -->|No| CheckOdd{n is odd?}
+    CheckOdd -->|Yes| ReturnMiddle[Return arr[n/2]]
+    CheckOdd -->|No| CalcAvg[Return average of arr[n-1/2] and arr[n/2]]
+    Return0 --> End([End])
+    ReturnMiddle --> End
+    CalcAvg --> End

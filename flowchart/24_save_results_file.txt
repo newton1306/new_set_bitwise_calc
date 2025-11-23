@@ -1,0 +1,24 @@
+flowchart TD
+    Start([Start])
+    Start --> PrintHeader[Print header: Save to File]
+    PrintHeader --> InputName[Input filename]
+    InputName --> OpenFile[Open file for writing]
+    OpenFile --> CheckOpen{File opened successfully?}
+    CheckOpen -->|No| Error[Print: Could not open file]
+    CheckOpen -->|Yes| Init[Initialize i = 0]
+    Init --> Loop{i < nsets?}
+    Loop -->|Yes| Convert[Convert set i bits to array]
+    Convert --> WriteName[Write set name and opening brace]
+    WriteName --> SetMax[Set max_print = min of n, 20]
+    SetMax --> WriteElems[Write elements up to max_print]
+    WriteElems --> CheckMore{n > 20?}
+    CheckMore -->|Yes| WriteCount[Write ... and count]
+    CheckMore -->|No| WriteBits
+    WriteCount --> WriteBits[Write bits representation]
+    WriteBits --> WriteNewline[Write newline]
+    WriteNewline --> Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| Close[Close file]
+    Close --> PrintDone[Print: Results saved]
+    Error --> End([End])
+    PrintDone --> End

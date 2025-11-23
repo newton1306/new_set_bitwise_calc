@@ -1,0 +1,6 @@
+flowchart TD
+    Start([Start])
+    Start --> PrintLine1[Print separator line]
+    PrintLine1 --> PrintTitle[Print title]
+    PrintTitle --> PrintLine2[Print separator line]
+    PrintLine2 --> End([End])

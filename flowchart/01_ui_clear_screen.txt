@@ -1,0 +1,7 @@
+flowchart TD
+    Start([Start])
+    Start --> CheckOS{Is Windows?}
+    CheckOS -->|Yes| ClearWin[Execute cls command]
+    CheckOS -->|No| ClearUnix[Execute clear command]
+    ClearWin --> End([End])
+    ClearUnix --> End

@@ -1,0 +1,12 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize i = 0]
+    Init --> Loop{i < BIT_ARR_LEN?}
+    Loop -->|Yes| Not[res[i] = NOT a[i]]
+    Not --> Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| CalcExcess[Calculate excess bits]
+    CalcExcess --> CheckExcess{excess > 0?}
+    CheckExcess -->|Yes| Mask[Mask last byte to remove excess bits]
+    CheckExcess -->|No| End([End])
+    Mask --> End

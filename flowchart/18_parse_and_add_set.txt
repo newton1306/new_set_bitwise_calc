@@ -1,0 +1,20 @@
+flowchart TD
+    Start([Start])
+    Start --> FindEq[Find = character in line]
+    FindEq --> CheckEq{Found =?}
+    CheckEq -->|No| Return[Return without action]
+    CheckEq -->|Yes| ExtractName[Extract and trim name before =]
+    ExtractName --> FindBraces[Find opening and closing braces]
+    FindBraces --> CheckBraces{Found both braces?}
+    CheckBraces -->|No| Return
+    CheckBraces -->|Yes| ParseNums[Parse numbers between braces]
+    ParseNums --> SavePrev[Save previous index]
+    SavePrev --> AddUpdate[Call add_or_update_set]
+    AddUpdate --> CheckNew{Was new set added?}
+    CheckNew -->|Yes| PrintNew[Print: New set stored]
+    CheckNew -->|No| CheckUpdate{Was set updated?}
+    CheckUpdate -->|Yes| PrintUpdate[Print: Set updated]
+    CheckUpdate -->|No| Return
+    PrintNew --> Return
+    PrintUpdate --> Return
+    Return --> End([End])

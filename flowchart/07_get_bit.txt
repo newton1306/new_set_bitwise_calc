@@ -1,0 +1,7 @@
+flowchart TD
+    Start([Start])
+    Start --> Calc[Calculate byte index = i/8]
+    Calc --> Shift[Shift right by i mod 8]
+    Shift --> And[AND with 1]
+    And --> Return[Return result]
+    Return --> End([End])

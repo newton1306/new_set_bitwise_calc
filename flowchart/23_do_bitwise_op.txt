@@ -1,0 +1,39 @@
+flowchart TD
+    Start([Start])
+    Start --> Clear[Clear screen]
+    Clear --> ShowAll[Show all sets]
+    ShowAll --> CheckEmpty{nsets == 0?}
+    CheckEmpty -->|Yes| Return[Return]
+    CheckEmpty -->|No| PrintDiv[Print divider and mode label]
+    PrintDiv --> Input1[Input first set name]
+    Input1 --> Find1[Find first set]
+    Find1 --> Check1{Set found?}
+    Check1 -->|No| Error1[Print: Set not found]
+    Check1 -->|Yes| InputOp[Input operation]
+    InputOp --> CheckNot{Operation is NOT?}
+    CheckNot -->|Yes| CalcNot[Calculate bitwise NOT]
+    CalcNot --> PrintRes1[Print result expression]
+    CheckNot -->|No| Input2[Input second set name]
+    Input2 --> Find2[Find second set]
+    Find2 --> Check2{Set found?}
+    Check2 -->|No| Error2[Print: Set not found]
+    Check2 -->|Yes| CalcOp[Calculate bitwise operation]
+    CalcOp --> PrintRes2[Print result expression]
+    PrintRes1 --> CopyRes[Copy result to temp set]
+    PrintRes2 --> CopyRes
+    CopyRes --> PrintDiv2[Print divider]
+    PrintDiv2 --> PrintSet[Print result set with stats]
+    PrintSet --> PrintDiv3[Print divider]
+    PrintDiv3 --> CheckSpace{nsets < MAX_SETS?}
+    CheckSpace -->|No| ErrorFull[Print: Storage full]
+    CheckSpace -->|Yes| AskSave[Ask: Save result?]
+    AskSave --> CheckYes{User answered yes?}
+    CheckYes -->|Yes| InputName[Input new set name]
+    InputName --> ConvertSave[Convert bits to array]
+    ConvertSave --> AddSet[Call add_or_update_set]
+    CheckYes -->|No| Return
+    Error1 --> Return
+    Error2 --> Return
+    ErrorFull --> Return
+    AddSet --> Return
+    Return --> End([End])

@@ -1,0 +1,15 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize i = 0]
+    Init --> Loop{i < BIT_ARR_LEN?}
+    Loop -->|Yes| CheckOp{Which operation?}
+    CheckOp -->|AND| OpAnd[res[i] = a[i] AND b[i]]
+    CheckOp -->|OR| OpOr[res[i] = a[i] OR b[i]]
+    CheckOp -->|XOR| OpXor[res[i] = a[i] XOR b[i]]
+    CheckOp -->|DIFF| OpDiff[res[i] = a[i] AND NOT b[i]]
+    OpAnd --> Inc[Increment i]
+    OpOr --> Inc
+    OpXor --> Inc
+    OpDiff --> Inc
+    Inc --> Loop
+    Loop -->|No| End([End])

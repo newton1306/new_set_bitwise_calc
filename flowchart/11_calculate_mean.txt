@@ -1,0 +1,13 @@
+flowchart TD
+    Start([Start])
+    Start --> Convert[Convert bits to array]
+    Convert --> CheckEmpty{n == 0?}
+    CheckEmpty -->|Yes| Return0[Return 0.0]
+    CheckEmpty -->|No| InitSum[Initialize sum = 0]
+    InitSum --> Loop{For each element}
+    Loop -->|More| Add[Add element to sum]
+    Add --> Loop
+    Loop -->|Done| Calc[Calculate mean = sum / n]
+    Calc --> Return[Return mean]
+    Return0 --> End([End])
+    Return --> End

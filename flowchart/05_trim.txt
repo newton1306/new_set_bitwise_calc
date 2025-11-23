@@ -1,0 +1,14 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize l=0, r=length-1]
+    Init --> LoopLeft{Is s[l] whitespace?}
+    LoopLeft -->|Yes| IncL[Increment l]
+    IncL --> LoopLeft
+    LoopLeft -->|No| LoopRight{Is s[r] whitespace AND r >= l?}
+    LoopRight -->|Yes| DecR[Decrement r]
+    DecR --> LoopRight
+    LoopRight -->|No| CheckMove{l > 0?}
+    CheckMove -->|Yes| Move[Move string from position l]
+    CheckMove -->|No| SetNull
+    Move --> SetNull[Set null terminator at r-l+1]
+    SetNull --> End([End])

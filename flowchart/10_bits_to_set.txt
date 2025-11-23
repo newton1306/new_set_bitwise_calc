@@ -1,0 +1,11 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize idx = 0, i = 0]
+    Init --> Loop{i < 100?}
+    Loop -->|Yes| Check{Is bit i set?}
+    Check -->|Yes| Store[Store i in arr[idx], increment idx]
+    Check -->|No| Inc
+    Store --> Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| SetN[Set n = idx]
+    SetN --> End([End])

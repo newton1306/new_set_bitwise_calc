@@ -1,0 +1,21 @@
+flowchart TD
+    Start([Start])
+    Start --> Convert[Convert bits to array]
+    Convert --> PrintName[Print set name and opening brace]
+    PrintName --> SetMax[Set max_print = min of n, 15]
+    SetMax --> Loop{For i = 0 to max_print}
+    Loop -->|More| PrintElem[Print element arr[i]]
+    PrintElem --> Loop
+    Loop -->|Done| CheckMore{n > 15?}
+    CheckMore -->|Yes| PrintCount[Print ... and count]
+    CheckMore -->|No| CheckEmpty
+    PrintCount --> CheckEmpty{n == 0?}
+    CheckEmpty -->|Yes| PrintEmptyMsg[Print Empty]
+    CheckEmpty -->|No| PrintClose
+    PrintEmptyMsg --> PrintClose[Print closing brace]
+    PrintClose --> CheckStats{n > 0?}
+    CheckStats -->|Yes| PrintStats[Print Mean and Median]
+    CheckStats -->|No| PrintEmptySet[Print Empty Set]
+    PrintStats --> PrintNewline[Print newline]
+    PrintEmptySet --> PrintNewline
+    PrintNewline --> End([End])

@@ -1,0 +1,10 @@
+flowchart TD
+    Start([Start])
+    Start --> PrintHeader[Print header: Input Set from Keyboard]
+    PrintHeader --> PrintFormat[Print format instruction]
+    PrintFormat --> ReadLine[Read line from user]
+    ReadLine --> Validate{Contains =, opening and closing braces?}
+    Validate -->|No| Error[Print: Invalid format]
+    Validate -->|Yes| Parse[Call parse_and_add_set]
+    Error --> End([End])
+    Parse --> End

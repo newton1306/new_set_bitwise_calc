@@ -1,0 +1,6 @@
+flowchart TD
+    Start([Start])
+    Start --> Calc[Calculate byte index = i/8]
+    Calc --> Shift[Calculate bit position = i mod 8]
+    Shift --> SetBit[Set bit using OR operation]
+    SetBit --> End([End])

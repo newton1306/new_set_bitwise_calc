@@ -1,0 +1,11 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize i = 0]
+    Init --> Loop{i < nsets?}
+    Loop -->|Yes| Compare{sets[i].name == name?}
+    Compare -->|Yes| ReturnI[Return i]
+    Compare -->|No| Inc[Increment i]
+    Inc --> Loop
+    Loop -->|No| ReturnNeg[Return -1]
+    ReturnI --> End([End])
+    ReturnNeg --> End

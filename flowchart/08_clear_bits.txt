@@ -1,0 +1,4 @@
+flowchart TD
+    Start([Start])
+    Start --> Clear[Set all bits to 0 using memset]
+    Clear --> End([End])

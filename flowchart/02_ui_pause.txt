@@ -1,0 +1,6 @@
+flowchart TD
+    Start([Start])
+    Start --> Print[Print: Press Enter to continue...]
+    Print --> ClearBuffer[Clear input buffer until newline]
+    ClearBuffer --> WaitEnter[Wait for Enter key]
+    WaitEnter --> End([End])

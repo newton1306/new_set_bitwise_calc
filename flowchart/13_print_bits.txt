@@ -1,0 +1,14 @@
+flowchart TD
+    Start([Start])
+    Start --> PrintLabel[Print BITS label]
+    PrintLabel --> SetMax[Set maxbit = min of 100, 64]
+    SetMax --> Init[Initialize i = maxbit-1]
+    Init --> Loop{i >= 0?}
+    Loop -->|Yes| PrintBit[Print bit at position i]
+    PrintBit --> Dec[Decrement i]
+    Dec --> Loop
+    Loop -->|No| CheckMore{UNIVERSAL_SET_SIZE > 64?}
+    CheckMore -->|Yes| PrintDots[Print ...]
+    CheckMore -->|No| PrintClose
+    PrintDots --> PrintClose[Print closing bracket]
+    PrintClose --> End([End])
