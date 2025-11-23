@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define UNIVERSAL_SET_SIZE 8
+#define UNIVERSAL_SET_SIZE 100
 #define MAX_SETS 10
 #define MAX_NAME 16
 #define WORD_SIZE 8
@@ -46,5 +46,9 @@ void save_results_file(const Set* sets, int nsets);
 void bitwise_operation(char op, const Set* a, const Set* b, unsigned char* res);
 void bitwise_not(const Set* a, unsigned char* res);
 void do_bitwise_op(Set* sets, int* nsets);
+
+// --- Statistics (เพิ่มฟังก์ชันคำนวณ) ---
+double calculate_mean(const Set* s);
+double calculate_median(const Set* s);
 
 #endif

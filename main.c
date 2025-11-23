@@ -1,14 +1,14 @@
 #include "set_calculator.h"
 
 void print_menu() {
-    ui_clear_screen(); // ล้างหน้าจอทุกครั้งที่โชว์เมนู
+    ui_clear_screen(); 
     printf("\n");
     printf("  +--------------------------------------+\n");
     printf("  |      SET BITWISE CALCULATOR PRO      |\n");
     printf("  +--------------------------------------+\n");
     printf("  |  1. Input set (Keyboard)             |\n");
     printf("  |  2. Input set (File)                 |\n");
-    printf("  |  3. Show all sets                    |\n");
+    printf("  |  3. Summary all sets (Mean & Median) |\n");
     printf("  |  4. Calculate (Bitwise Ops)          |\n");
     printf("  |  5. Save results to file             |\n");
     printf("  |  6. Exit                             |\n");
@@ -33,9 +33,9 @@ int main() {
 
         switch (ch) {
             case 1: 
-                ui_clear_screen(); // ล้างหน้าจอก่อนเข้าฟังก์ชัน
+                ui_clear_screen(); 
                 input_set_keyboard(sets, &nsets); 
-                ui_pause(); // หยุดรอก่อนกลับเมนู
+                ui_pause(); 
                 break;
             case 2: {
                 ui_clear_screen();
@@ -54,7 +54,6 @@ int main() {
                 ui_pause();
                 break;
             case 4: 
-                // ใน do_bitwise_op มี clear_screen เองแล้ว
                 do_bitwise_op(sets, &nsets); 
                 ui_pause();
                 break;

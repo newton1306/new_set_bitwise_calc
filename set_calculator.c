@@ -3,8 +3,6 @@
 // --- UI Helper Functions (ส่วนใหม่เพื่อความสวยงาม) ---
 
 void ui_clear_screen() {
-    // ใช้ system("cls") สำหรับ Windows และ system("clear") สำหรับ Linux/Mac
-    // ถ้าไม่อยากใช้ system() สามารถใช้ลูป print \n หลายๆ ทีแทนได้
     #ifdef _WIN32
         system("cls");
     #else
@@ -15,8 +13,8 @@ void ui_clear_screen() {
 void ui_pause() {
     printf("\n[Press Enter to continue...]");
     char c;
-    while ((c = getchar()) != '\n' && c != EOF); // เคลียร์ buffer ถ้ามี
-    getchar(); // รอรับ Enter จริงๆ
+    while ((c = getchar()) != '\n' && c != EOF); 
+    getchar(); 
 }
 
 void ui_print_header(const char* title) {
@@ -61,7 +59,31 @@ void bits_to_set(const unsigned char* bits, int* arr, int* n) {
     *n = idx;
 }
 
-// --- Display Functions (ปรับปรุงใหม่) ---
+// --- Statistics (ฟังก์ชันคำนวณ) ---
+
+double calculate_mean(const Set* s) {
+    int arr[UNIVERSAL_SET_SIZE], n;
+    bits_to_set(s->bits, arr, &n);
+    if (n == 0) return 0.0;
+    
+    double sum = 0;
+    for (int i = 0; i < n; ++i) sum += arr[i];
+    return sum / n;
+}
+
+double calculate_median(const Set* s) {
+    int arr[UNIVERSAL_SET_SIZE], n;
+    bits_to_set(s->bits, arr, &n); // ฟังก์ชันนี้คืนค่าเรียงลำดับอยู่แล้ว
+    if (n == 0) return 0.0;
+    
+    if (n % 2 != 0) {
+        return (double)arr[n / 2];
+    } else {
+        return (double)(arr[(n - 1) / 2] + arr[n / 2]) / 2.0;
+    }
+}
+
+// --- Display Functions (ปรับปรุงใหม่ให้แสดง Mean/Median) ---
 
 void print_bits(const unsigned char* bits) {
     printf(" [BITS: ");
@@ -76,10 +98,9 @@ void print_set(const Set* s) {
     int arr[UNIVERSAL_SET_SIZE], n = 0;
     bits_to_set(s->bits, arr, &n);
     
-    // ใช้ %-12s เพื่อจองพื้นที่ชื่อ 12 ตัวอักษร ให้ชื่อตรงกันเป็นแนวตั้ง
     printf("  %-12s = { ", s->name);
     
-    int max_print = n < 15 ? n : 15; // ลดจำนวนที่โชว์ลงนิดหน่อยกันบรรทัดล้น
+    int max_print = n < 15 ? n : 15;
     for (int i = 0; i < max_print; ++i)
         printf(i == max_print-1 ? "%d" : "%d, ", arr[i]);
         
@@ -87,15 +108,19 @@ void print_set(const Set* s) {
     else if (n == 0) printf("Empty");
     
     printf(" }");
-    
-    // ถ้าอยากโชว์ Bits ด้วย ให้เอาคอมเมนต์ออก
-    // print_bits(s->bits); 
+
+    // เพิ่มส่วนแสดง Mean และ Median ตรงนี้
+    if (n > 0) {
+        printf("  [Mean: %.2f, Median: %.2f]", calculate_mean(s), calculate_median(s));
+    } else {
+        printf("  [Empty Set]");
+    }
     
     printf("\n");
 }
 
 void show_all_sets(const Set* sets, int nsets) {
-    ui_print_header("List of All Sets");
+    ui_print_header("Summary of All Sets (with Stats)");
     if (nsets == 0) { printf("  (No sets stored yet)\n"); return; }
     for (int i = 0; i < nsets; ++i) print_set(&sets[i]);
     ui_print_divider();
@@ -196,7 +221,7 @@ void bitwise_not(const Set* a, unsigned char* res) {
 }
 
 void do_bitwise_op(Set* sets, int* nsets) {
-    ui_clear_screen(); // เคลียร์หน้าจอก่อนเริ่มคำนวณ
+    ui_clear_screen(); 
     show_all_sets(sets, *nsets);
     
     if (*nsets == 0) return;
@@ -232,7 +257,7 @@ void do_bitwise_op(Set* sets, int* nsets) {
     
     memcpy(temp.bits, res, BIT_ARR_LEN);
     ui_print_divider();
-    print_set(&temp); // โชว์ผลลัพธ์
+    print_set(&temp); // ผลลัพธ์ก็จะโชว์ Mean/Median ด้วยอัตโนมัติ
     ui_print_divider();
 
     // Logic การบันทึก
