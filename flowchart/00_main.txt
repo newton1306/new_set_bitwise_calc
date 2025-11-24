@@ -1,0 +1,46 @@
+flowchart TD
+    Start([Start])
+    Start --> Init[Initialize sets array and nsets = 0]
+    Init --> Loop{Infinite Loop}
+    Loop --> PrintMenu[Call print_menu]
+    PrintMenu --> ReadInput[Read user choice]
+    ReadInput --> ValidInput{Valid integer input?}
+    ValidInput -->|No| ClearBuffer[Clear input buffer]
+    ClearBuffer --> Loop
+    ValidInput -->|Yes| ConsumeNL[Consume newline]
+    ConsumeNL --> Switch{Check choice}
+    
+    Switch -->|1| Case1Clear[Clear screen]
+    Case1Clear --> Case1Input[Call input_set_keyboard]
+    Case1Input --> Case1Pause[Pause]
+    Case1Pause --> Loop
+    
+    Switch -->|2| Case2Clear[Clear screen]
+    Case2Clear --> Case2Header[Print header - Import from File]
+    Case2Header --> Case2Prompt[Prompt for filename]
+    Case2Prompt --> Case2Read[Read filename]
+    Case2Read --> Case2Remove[Remove newline from filename]
+    Case2Remove --> Case2Import[Call input_set_file]
+    Case2Import --> Case2Pause[Pause]
+    Case2Pause --> Loop
+    
+    Switch -->|3| Case3Clear[Clear screen]
+    Case3Clear --> Case3Show[Call show_all_sets]
+    Case3Show --> Case3Pause[Pause]
+    Case3Pause --> Loop
+    
+    Switch -->|4| Case4Calc[Call do_bitwise_op]
+    Case4Calc --> Case4Pause[Pause]
+    Case4Pause --> Loop
+    
+    Switch -->|5| Case5Clear[Clear screen]
+    Case5Clear --> Case5Save[Call save_results_file]
+    Case5Save --> Case5Pause[Pause]
+    Case5Pause --> Loop
+    
+    Switch -->|6| Exit[Print Bye Bye message]
+    Exit --> End([End])
+    
+    Switch -->|Default| Invalid[Print Invalid menu message]
+    Invalid --> InvalidPause[Pause]
+    InvalidPause --> Loop
